@@ -1,0 +1,18 @@
+<div>
+  <md-card class="card">
+    <h1>LogIn</h1>
+
+    <md-input-container>
+      <input mdInput type="email" placeholder="email" [(ngModel)]="email" required>
+    </md-input-container><br>
+    <md-input-container>
+      <input mdInput type="password" placeholder="password" [(ngModel)]="password" required>
+    </md-input-container><br>
+
+    <button md-raised-button (click)="login()" [disabled]="!email || !password">Done</button>
+
+    <br>
+    <p>Not registered yet registered?<a routerLink="/signup">register</a></p>
+
+  </md-card>
+</div>

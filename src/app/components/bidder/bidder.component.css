@@ -1,0 +1,53 @@
+ul{
+    list-style-type: none;
+}
+
+    .btn2{
+  /* position: absolute; */
+    /* background-color: rgb(177,57,74); */
+  /* color: rgb(255,250,255); */
+    font-weight: bold;
+  /* margin-left: 1230px; */
+    
+ }
+.end{
+    color:rgb(255, 0, 0)
+}
+.ended{
+    background-color: rgb(233,433,34)
+}
+.card{
+   background-color: rgb(231,233,143)
+}
+.bt{
+background-color:rgb(255, 0, 0);
+    /* float:right; */
+    margin: 0px 90px 0px 0px ;
+}
+.btn2{
+background-color: orange;
+    color:blue;
+    float: left;
+}
+
+.button{
+  /* position: absolute; */
+    background-color: rgb(250,166,126);
+  color: rgb(63,81,181);
+    font-weight: bold;
+  /* margin-left: 1230px; */
+}
+.btn-danger{
+    background-color: rgb(250,166,126);
+      color: rgb(63,81,181);
+
+}
+.btn-info{
+    background-color:rgb(255, 0, 0);
+     color: rgb(25,111,111);
+   float:right;
+}
+
+.main-buttons{
+    float: left;
+}

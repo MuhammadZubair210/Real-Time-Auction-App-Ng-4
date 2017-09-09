@@ -1,0 +1,130 @@
+<div class="main-buttons">
+<h4><strong>Category</strong></h4>
+<button md-button class="btn2 btn btn-success" (click)="func()">Mobile</button>
+<br>
+<br>
+
+<button md-button class="btn2 btn btn-success" (click)="funcl()">Laptops</button>
+<br>
+<br>
+
+<button md-button class="btn2 btn btn-success" (click)="func2()">Tablets</button>
+<!-- <button md-button class="bt btn btn-danger" routerLink="/home">Cancel</button> -->
+</div>
+<div class="container">
+
+  <ul *ngFor="let k of key;let i=index">
+    <md-card>
+      <h4><strong>Bids For Selected Category</strong></h4>
+      <li><strong>No:</strong>{{i+1}}</li>
+      <li><strong>Title:</strong>{{k.Title}}</li>
+      <li><strong>Description:</strong>{{k.Description}}</li>
+      <li><strong>Category:</strong>{{k.Category}}</li>
+      <li><strong>Minimum Amount:</strong>RS:{{k.MinimumBidAmount}}</li>
+      <!-- <td> <button class="btn btn-danger" type="button" (click)="bid(i,k.Category);addbids(i, k.Category);timecheck(i, k.Category)">View Details</button> -->
+      <li>
+        <button md-button class="button" type="button" (click)="bid(i,k.Category)">View Details</button>
+      </li>
+    </md-card>
+  </ul>
+
+
+  <br>
+
+  <ul *ngFor="let b of mybid;let n=index">
+    <md-card>
+
+      <p><strong>Details of Selected Item</strong></p>
+      <li><strong>Title:</strong>{{b.Title}}</li>
+
+      <li><strong>Description:</strong>{{b.Description}}</li>
+      <li><strong>Category:</strong>{{b.Category}}</li>
+      <li><strong>AuctionEndDate:</strong>{{b.AutionEndDate}}</li>
+      <li><strong>AuctionEndTime:</strong>{{b.AutionEndTime}}</li>
+      <li><strong>MinimumBidAmount:</strong>{{b.MinimumBidAmount}}</li>
+      <div *ngIf="True">
+        <div class="ended">
+          <li><strong>Item Awarded To :</strong>{{largestname}}</li>
+          <li><strong>Closing Amount:</strong>{{largest}}</li>
+          <li class="end"><strong>Bidding Closed</strong></li>
+        </div>
+      </div>
+      <div *ngIf="isTrue">
+        <!-- <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Enter My Bid Amount</button> -->
+        <!-- <button md-button (click)="enterbid()">Enter Bid Amount</button> -->
+        <button type="button" md-button class="btn-danger" (click)="enterbid()" data-toggle="modal" data-target="#myModal">Enter Bid Amount</button>
+        <br><br>
+        <div *ngIf="bidnow">
+
+          <!-- Modal -->
+          <div class="modal fade" id="myModal" role="dialog">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Real time Auction System</h4>
+                </div>
+
+
+                <md-card class="addamount">
+                  <div>
+                    <h4></h4>
+                  </div>
+                  <div>
+                    <p><strong>Bid Starting Amount:</strong>{{b.MinimumBidAmount}}</p>
+                    <p><strong>Highest Bid Uptill is : </strong>{{largest}}</p>
+                    <md-input-container>
+                      <input mdInput placeholder="Enter Amount in numbers" type="number" name="amount" [(ngModel)]="amount">
+                    </md-input-container><br>
+                    <button md-button class="btn-danger" (click)="submitamount(n,b.Category)">Send Bid</button>
+                    <button type="button" md-button class="btn btn-info" data-dismiss="modal">Close</button>
+
+                  </div>
+                </md-card>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ul class="card" *ngFor="let bb of auc">
+        <md-card>
+          <p><strong>Bidding Offers</strong></p>
+          <md-card-content>
+            <Strong>Bidder Name:</Strong>{{bb.name}}</md-card-content>
+          <md-card-content>
+            <Strong>Proposed Bid Amount:</Strong>{{bb.amount}}</md-card-content>
+        </md-card>
+      </ul>
+    </md-card>
+  </ul>
+
+</div>
+<!-- <li>{{k.Tilte}}</li>
+    <li>{{k.Description}}</li>
+    <li>{{k.Category}}</li>
+    <button type="button" (click)="bid(i,k.Category);addbids(i,k.Category);timecheck(i,k.Category)">View</button> -->
+<!-- </ul> -->
+<!-- </div> -->
+<!-- <div *ngFor="let bb of auc"> -->
+
+<!-- <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-lg">
+       <div class="modal-content">  -->
+<!-- <div *ngIf="bidnow">
+    <div class="modal-header">
+      <h4 class="modal-title">Real time Auction System</h4>
+    </div>
+    <div class="modal-body">
+      <p><strong>Bid Starting Amount:</strong>{{b.MinimumBidAmount}}</p>
+      <p><strong>Highest Bid Uptill is : </strong>{{largest}}</p>
+
+      <md-input-container>
+        <input mdInput placeholder="Enter Amount in numbers" type="number" name="amount" [(ngModel)]="amount">
+      </md-input-container><br>
+      <button class="btn btn-danger" (click)="submitamount(b.Category)">Send Bid</button>
+    </div>
+  </div> -->
+<!-- </div>
+    </div>
+  </div> -->
+<!-- </ul> -->

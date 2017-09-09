@@ -1,0 +1,15 @@
+<md-toolbar color="primary">
+    Realtime Auction System
+    <span class="example-spacer"></span>
+    <a class='btn' *ngIf="!(user | async)" md-raised-button routerLink="/signup">SignUp</a>
+    <a class='btn' *ngIf="!(user | async)" md-raised-button routerLink="/login">SignIn</a>
+    <a class='btn2' *ngIf="(user | async)" md-raised-button routerLink="/home">Home</a>
+    <a class='btn2' *ngIf="(user | async)" md-raised-button routerLink="/bidder">Bids</a>
+    <a class='btn2' *ngIf="(user | async)" md-raised-button routerLink="/auction">Auction</a>
+    <a class='btn3' *ngIf="(user | async)" (click)="logout()" md-raised-button>Logout</a>
+
+
+
+</md-toolbar>
+
+<router-outlet></router-outlet>

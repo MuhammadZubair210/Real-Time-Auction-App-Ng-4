@@ -1,0 +1,32 @@
+.same{
+    background-color: lightblue;
+    color: white;
+
+}
+/* div{
+   text-align:center; 
+    border: 2px solid white;
+    border-radius: 10px;
+    margin-top: 5%;
+    margin-right: 28%;
+    margin-left: 30%;
+
+} */
+h1{
+    font-size: 30px;
+    color: black;
+
+}
+ button{
+    margin:5%;
+} 
+
+#butt , #but{
+    float:right;
+    margin: 2% 5% 0% 0%; 
+}
+
+md-card{
+    width:25%;
+    margin:1% 0% 0% 38%;
+}

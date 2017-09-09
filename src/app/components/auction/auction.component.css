@@ -1,0 +1,15 @@
+md-card{
+    width:25%;
+    margin:1% 0% 0% 38%;
+}
+
+.same{
+background-color: lightblue;
+color:white;
+}
+
+.cancel{
+    /* margin: 0px 0px 0px 100px; */
+    background-color: red;
+    color:white;
+}
