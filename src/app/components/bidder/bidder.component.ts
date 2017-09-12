@@ -143,8 +143,6 @@ export class BidderComponent implements OnInit {
               this.largest = this.aucamount[i];
             }
           }
-          console.log(this.largestname)
-          console.log(this.largest);
         })
       })
   }
