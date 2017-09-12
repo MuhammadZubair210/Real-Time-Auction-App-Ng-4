@@ -24,9 +24,20 @@
         <md-radio-button value="laptop">laptop</md-radio-button>
         <md-radio-button value="tablet">tablet</md-radio-button>
       </md-radio-group><br>
+      <div *ngIf="show">
+        <div class="alert alert-danger">
+          <strong>Submission failed !!! Please don't enter past date.</strong>
+        </div>
+      </div>
+      <div *ngIf="submitshow">
+        <div class="alert alert-info">
+          <strong>Successfully submitted ! your product will be awarded to the highest bidder."Thank You"</strong>
+        </div>
+      </div>
       <button md-button class="same" name="submit" value="submit" type="submit">Add Auction</button>
       <span>or</span>
       <button md-button class="cancel" type="button" routerLink="/home">Go to Home</button>
+
 
 
 

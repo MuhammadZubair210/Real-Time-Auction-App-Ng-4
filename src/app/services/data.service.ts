@@ -20,13 +20,12 @@ export class DataService {
       if (auth) {
         this.authstate = auth.uid;
         this.useremail = auth.email;
-        console.log(auth.email)
+        console.log(auth.email);
         console.log(this.authstate);
         console.log("Auth Changes");
         if (auth.email) {
           this.router.navigate(['/home']);
         }
-
       }
       else {
         console.log("user not logged in")
@@ -54,9 +53,6 @@ export class DataService {
             this.router.navigate(['/home']);
             this.store.dispatch({ type: ActionType.User, payload: this.uuid });
           }
-          else if (snapshot.val().type == 'admin') {
-            this.router.navigate(['/admin']);
-          }
           else {
             alert("show correct email or password");
             this.router.navigate(['/login']);
@@ -66,10 +62,7 @@ export class DataService {
         });
       })
   }
-
-
-
-
+    
   register(name: string, email: string, password: string, type: string) {
     console.log("successfull");
     console.log(name, email, password, type);
@@ -119,15 +112,15 @@ export class DataService {
     this.names = this.name
   }
 
-  applybids(uid) {
-    this.userprofile = this.db.list('/auction/' + uid, { preserveSnapshot: true });
-    this.userprofile
-      .subscribe(snapshots => {
-        this.name;
-        snapshots.forEach(snapshot => {
-          this.name = snapshot.val().name;
-          console.log(this.name)
-        })
-      })
-  }
+  // applybids(uid) {
+  //   this.userprofile = this.db.list('/auction/' + uid, { preserveSnapshot: true });
+  //   this.userprofile
+  //     .subscribe(snapshots => {
+  //       this.name;
+  //       snapshots.forEach(snapshot => {
+  //         this.name = snapshot.val().name;
+  //         console.log(this.name)
+  //       })
+  //     })
+  // }
 }

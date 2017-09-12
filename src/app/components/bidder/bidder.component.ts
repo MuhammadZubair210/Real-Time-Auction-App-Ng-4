@@ -24,6 +24,7 @@ export class BidderComponent implements OnInit {
   key = [];
 
   func() {
+    this.mybid = [];
     this.items = this.db.list('/auction/', { preserveSnapshot: true });
     this.items
       .subscribe(snapshots => {
@@ -42,6 +43,7 @@ export class BidderComponent implements OnInit {
   }
   func1key = [];
   funcl() {
+    this.mybid = []
     this.items = this.db.list('/auction/', { preserveSnapshot: true });
     this.items
       .subscribe(snapshots => {
@@ -60,6 +62,7 @@ export class BidderComponent implements OnInit {
   }
   func2key = [];
   func2() {
+    this.mybid = [];
     this.items = this.db.list('/auction/', { preserveSnapshot: true });
     this.items
       .subscribe(snapshots => {
@@ -89,7 +92,7 @@ export class BidderComponent implements OnInit {
   True = false;
   time;
   bid(key, Category) {
-
+    this.key = [];
     this.items = this.db.list('/auction/' + Category, { preserveSnapshot: true });
     this.items
       .subscribe(snapshots => {
@@ -104,24 +107,14 @@ export class BidderComponent implements OnInit {
           console.log(this.key)
           console.log(snapshot.val().AutionEndTimeStamp)
           this.time = snapshot.val().AutionEndTimeStamp
-
         })
       })
-
     this.varkey = this.auckey[key]
     this.mybid.push(this.allkeys[key]);
-    this.addbids(key, Category)
     this.timecheck(key, Category)
+    this.addbids(key, Category)
   }
 
-  japply: FirebaseListObservable<any[]>;
-
-  submitamount(i, category) {
-    console.log(this.auckey[i])
-    let data = { key: this.varkey, amount: this.amount, name: this._service.name }
-    this.japply = this.db.list('/bids/' + this.varkey, { preserveSnapshot: true })
-    this.japply.push(data)
-  }
   largest = 0;
   largestname;
   aucamount = [];
@@ -143,9 +136,7 @@ export class BidderComponent implements OnInit {
             this.aucamount.push(bid.val().amount)
             console.log(this.auc)
           }
-          // console.log(this.varkey)
           console.log(bid.key)
-
           for (var i = 0; i <= this.aucamount.length; i++) {
             if (this.aucamount[i] > this.largest) {
               this.largestname = bid.val().name
@@ -154,17 +145,13 @@ export class BidderComponent implements OnInit {
           }
           console.log(this.largestname)
           console.log(this.largest);
-
-
         })
       })
-
   }
   pushkey = [];
   pushval = [];
   verify: FirebaseListObservable<any[]>;
   timecheck(key, Category) {
-    // console.log(this._service.name)
     this.verify = this.db.list('/auction/' + Category, { preserveSnapshot: true });
     console.log(this.auckey[key])
     this.verify
@@ -177,32 +164,59 @@ export class BidderComponent implements OnInit {
         snapshots.forEach(bid => {
           this.pushkey.push(bid.key)
           this.pushval.push(bid.val())
-          for (var i = 0; i < this.pushkey.length; i++) {
-            if (this.pushkey[key] == this.pushkey[i]) {
-              console.log(this.pushkey[key])
-              console.log(this.pushval[key].AutionEndTimeStamp)
-              if ((new Date().getTime()) > this.pushval[key].AutionEndTimeStamp) {
-                this.isTrue = false;
-                this.True = true;
-              }
-              else {
-                this.isTrue = true;
-                this.True = false;
-              }
-            }
-          }
         })
-      })
+        if (this.echeck(key, Category)) {
 
+          console.log("working")
+          this.isTrue = false;
+          this.True = true;
+        }
+        else {
+          console.log("not working")
+          this.isTrue = true;
+          this.True = false;
+        }
+      })
+  }
+
+  echeck(key, category) {
+    for (var i = 0; i < this.pushkey.length; i++) {
+      if (this.pushkey[key] == this.pushkey[i]) {
+        console.log(key, category)
+        console.log(this.pushval[key].AutionEndTimeStamp)
+        if ((new Date().getTime()) > this.pushval[key].AutionEndTimeStamp) {
+          console.log("not submitted")
+          return true;
+        }
+      }
+    }
   }
   bidnow = false;
   enterbid() {
-    if (this.bidnow == false) {
-      this.bidnow = true;
+    this.alert = false;
+  }
+  japply: FirebaseListObservable<any[]>;
+  alert = false;
+  notsubmit = false;
+  submitamount(i) {
+
+
+    console.log(this.varkey)
+
+    console.log(this.mybid)
+    if (this.mybid[i].AutionEndTimeStamp > (new Date().getTime())) {
+      console.log(this.mybid[i].Title)
+      let data = { key: this.varkey, amount: this.amount, name: this._service.name }
+      this.japply = this.db.list('/bids/' + this.varkey, { preserveSnapshot: true })
+      this.alert = true
+      this.notsubmit = false;
+      this.japply.push(data)
     }
     else {
-      this.bidnow = false;
+      this.alert = false;
+      this.notsubmit = true;
+      console.log("not Working")
     }
-  }
 
+  }
 }

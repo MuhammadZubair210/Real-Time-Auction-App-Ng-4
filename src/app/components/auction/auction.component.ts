@@ -36,19 +36,29 @@ export class AuctionComponent implements OnInit {
     });
 
   }
-
+  show = false;
+  submitshow = false
   submit(value: ProductModel) {
+
     let startdate = new Date(value.AutionEndDate + " " + value.AutionEndTime);
-    value.uid = this.af.auth.currentUser.uid;
-    value.Title = value.Title;
-    value.Description = value.Description;
-    value.AutionEndDate = value.AutionEndDate;
-    value.AutionEndTimeStamp = startdate.getTime();
-    value.MinimumBidAmount = value.BidStartingAmount;
-    value.Category = value.Category;
-    console.log(value)
-    this.db.list("auction/" + value.Category).push(value);
-    this.router.navigate(['/home'])
+    if (startdate.getTime() < new Date().getTime()) {
+      this.show = true;
+      this.submitshow = false;
+    }
+    else {
+      value.uid = this.af.auth.currentUser.uid;
+      value.Title = value.Title;
+      value.Description = value.Description;
+      value.AutionEndDate = value.AutionEndDate;
+      value.AutionEndTimeStamp = startdate.getTime();
+      value.MinimumBidAmount = value.BidStartingAmount;
+      value.Category = value.Category;
+      console.log(value)
+      this.db.list("auction/" + value.Category).push(value);
+      this.submitshow = true;
+      this.show = false;
+      // this.router.navigate(['/home'])
+    }
   }
 
 
