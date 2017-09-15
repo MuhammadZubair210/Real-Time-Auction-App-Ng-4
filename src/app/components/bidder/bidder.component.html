@@ -28,7 +28,7 @@
   <br>
   <ul *ngFor="let b of mybid;let n=index">
     <md-card>
-      <p><strong>Details of Selected Item</strong></p>
+      <h3>Details of Selected Item</h3>
       <li><strong>Title:</strong>{{b.Title}}</li>
       <li><strong>Description:</strong>{{b.Description}}</li>
       <li><strong>Category:</strong>{{b.Category}}</li>
@@ -65,7 +65,7 @@
                   <p><strong>Bid Starting Amount:</strong>{{b.BidStartingAmount}}</p>
                   <p><strong>Highest Bid Uptill is : </strong>{{largest}}</p>
                   <p><strong>Highest Bidder Name : </strong>{{largestname}}</p>
-                  
+
                   <md-input-container>
                     <input mdInput placeholder="Enter Amount in numbers" type="number" name="amount" [(ngModel)]="amount">
                   </md-input-container><br>
@@ -86,7 +86,7 @@
                   </div>
                   <div *ngIf="sameamount">
                     <div class="alert alert-danger">
-                      <strong>Your entered amount is picked by another user you should pick greater than this !!!</strong>
+                      <strong>{{this.amount}} too low amount please pick greater than "{{largest}}"</strong>
                     </div>
                   </div>
                   <button md-button class="btn-danger" (click)="submitamount(n)">Send Bid</button>
@@ -99,45 +99,18 @@
         </div>
       </div>
       <!-- </div>  -->
+      <br>
+      <h3 class="h3">Total offered Bids</h3>
+      <!-- <ul class="card" *ngFor="let bb of auc"> -->
+      <md-card *ngFor="let bb of auc">
+        <p>
+          <Strong>Bidder Name:</Strong>{{bb.name}}</p>
+        <p>
+          <Strong>Proposed Bid Amount:</Strong>{{bb.amount}}</p>
+      </md-card>
+        <br>
 
-      <ul class="card" *ngFor="let bb of auc">
-        <md-card>
-          <p><strong>Bidder Details</strong></p>
-          <md-card-content>
-            <Strong>Bidder Name:</Strong>{{bb.name}}</md-card-content>
-          <md-card-content>
-            <Strong>Proposed Bid Amount:</Strong>{{bb.amount}}</md-card-content>
-        </md-card>
-
-      </ul>
+      <!-- </ul> -->
     </md-card>
   </ul>
 </div>
-<!-- <li>{{k.Tilte}}</li>
-    <li>{{k.Description}}</li>
-    <li>{{k.Category}}</li>
-    <button type="button" (click)="bid(i,k.Category);addbids(i,k.Category);timecheck(i,k.Category)">View</button> -->
-<!-- </ul> -->
-<!-- </div> -->
-<!-- <div *ngFor="let bb of auc"> -->
-
-<!-- <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-lg">
-       <div class="modal-content">  -->
-<!-- <div *ngIf="bidnow">
-    <div class="modal-header">
-      <h4 class="modal-title">Real time Auction System</h4>
-    </div>
-    <div class="modal-body">
-      <p><strong>Bid Starting Amount:</strong>{{b.MinimumBidAmount}}</p>
-      <p><strong>Highest Bid Uptill is : </strong>{{largest}}</p>
-      <md-input-container>
-        <input mdInput placeholder="Enter Amount in numbers" type="number" name="amount" [(ngModel)]="amount">
-      </md-input-container><br>
-      <button class="btn btn-danger" (click)="submitamount(b.Category)">Send Bid</button>
-    </div>
-  </div> -->
-<!-- </div>
-    </div>
-  </div> -->
-<!-- </ul> -->

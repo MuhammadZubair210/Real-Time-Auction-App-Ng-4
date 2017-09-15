@@ -4,10 +4,10 @@
     <form [formGroup]="myForm" (ngSubmit)="submit(myForm.value)">
 
       <md-input-container>
-        <input mdInput placeholder="Title" type="text" name="text" formControlName="Title">
+        <input mdInput placeholder="Product Title" type="text" name="text" formControlName="Title">
       </md-input-container><br>
       <md-input-container>
-        <input mdInput placeholder="Description" type="text" name="Description" formControlName="Description">
+        <input mdInput placeholder="Product Description" type="text" name="Description" formControlName="Description">
       </md-input-container><br>
       <md-input-container>
         <input mdInput placeholder="AutionEndDate" type="date" name="AutionEndDate" formControlName="AutionEndDate">
@@ -18,7 +18,7 @@
       <md-input-container>
         <input mdInput placeholder="MinimumBidAmount" type="text" name="AutionEndDate" formControlName="BidStartingAmount">
       </md-input-container><br>
-      <h5>Category</h5>
+      <h5>Product Category</h5>
       <md-radio-group [formControl]="myForm.controls['Category']">
         <md-radio-button value="mobile">mobile</md-radio-button>
         <md-radio-button value="laptop">laptop</md-radio-button>

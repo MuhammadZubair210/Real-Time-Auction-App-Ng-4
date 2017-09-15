@@ -215,6 +215,7 @@ export class BidderComponent implements OnInit {
           this.japply = this.db.list('/bids/' + this.varkey, { preserveSnapshot: true })
           this.alert = true
           this.sameamount = false;
+          this.lowamount = false;
           this.notsubmit = false;
           this.japply.push(data)
         }
