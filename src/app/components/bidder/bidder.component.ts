@@ -190,26 +190,42 @@ export class BidderComponent implements OnInit {
       }
     }
   }
+  lowamount = false
   bidnow = false;
   enterbid() {
     this.alert = false;
+    this.lowamount = false;
+    this.notsubmit = false;
+    this.sameamount = false;
   }
   japply: FirebaseListObservable<any[]>;
   alert = false;
   notsubmit = false;
+  sameamount = false;
   submitamount(i) {
-
-
     console.log(this.varkey)
-
     console.log(this.mybid)
+    console.log(this.largest)
     if (this.mybid[i].AutionEndTimeStamp > (new Date().getTime())) {
-      console.log(this.mybid[i].Title)
-      let data = { key: this.varkey, amount: this.amount, name: this._service.name }
-      this.japply = this.db.list('/bids/' + this.varkey, { preserveSnapshot: true })
-      this.alert = true
-      this.notsubmit = false;
-      this.japply.push(data)
+      if (this.amount >= this.mybid[i].BidStartingAmount) {
+        if (this.amount > this.largest) {
+          console.log(this.amount)
+          console.log(this.largest)
+          let data = { key: this.varkey, amount: this.amount, name: this._service.name }
+          this.japply = this.db.list('/bids/' + this.varkey, { preserveSnapshot: true })
+          this.alert = true
+          this.sameamount = false;
+          this.notsubmit = false;
+          this.japply.push(data)
+        }
+        else {
+          this.sameamount = true;
+        }
+      }
+      else {
+        this.alert = false
+        this.lowamount = true
+      }
     }
     else {
       this.alert = false;

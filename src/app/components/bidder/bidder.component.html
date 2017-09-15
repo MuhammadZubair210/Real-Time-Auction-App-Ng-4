@@ -65,9 +65,7 @@
                   <p><strong>Bid Starting Amount:</strong>{{b.BidStartingAmount}}</p>
                   <p><strong>Highest Bid Uptill is : </strong>{{largest}}</p>
                   <p><strong>Highest Bidder Name : </strong>{{largestname}}</p>
-                  <p>
-                    <Strong>Item awarded To</Strong>{{awardedname}}</p>
-                  <!-- </md-card> -->
+                  
                   <md-input-container>
                     <input mdInput placeholder="Enter Amount in numbers" type="number" name="amount" [(ngModel)]="amount">
                   </md-input-container><br>
@@ -79,6 +77,16 @@
                   <div *ngIf="notsubmit">
                     <div class="alert alert-danger">
                       <strong>Sorry bidding times up !! you are not able to bid any more</strong>
+                    </div>
+                  </div>
+                  <div *ngIf="lowamount">
+                    <div class="alert alert-danger">
+                      <strong>your amount should more than to bid starting amount !!!</strong>
+                    </div>
+                  </div>
+                  <div *ngIf="sameamount">
+                    <div class="alert alert-danger">
+                      <strong>Your entered amount is picked by another user you should pick greater than this !!!</strong>
                     </div>
                   </div>
                   <button md-button class="btn-danger" (click)="submitamount(n)">Send Bid</button>
@@ -94,7 +102,7 @@
 
       <ul class="card" *ngFor="let bb of auc">
         <md-card>
-          <p><strong>Bidding Offers</strong></p>
+          <p><strong>Bidder Details</strong></p>
           <md-card-content>
             <Strong>Bidder Name:</Strong>{{bb.name}}</md-card-content>
           <md-card-content>
@@ -123,7 +131,6 @@
     <div class="modal-body">
       <p><strong>Bid Starting Amount:</strong>{{b.MinimumBidAmount}}</p>
       <p><strong>Highest Bid Uptill is : </strong>{{largest}}</p>
-
       <md-input-container>
         <input mdInput placeholder="Enter Amount in numbers" type="number" name="amount" [(ngModel)]="amount">
       </md-input-container><br>
