@@ -11,9 +11,7 @@ interface ProductModel {
     AutionEndTime: String,
     AutionEndTimeStamp: Number,
     BidStartingAmount: Number,
-    MinimumBidAmount: Number,
     Category: String,
-    AuctionAwardedToAmount: Number,
 }
 
 export default ProductModel;

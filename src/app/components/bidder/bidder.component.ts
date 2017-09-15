@@ -117,6 +117,7 @@ export class BidderComponent implements OnInit {
 
   largest = 0;
   largestname;
+  awardedname: String;
   aucamount = [];
   addbids(key, Category) {
     console.log(this._service.name)

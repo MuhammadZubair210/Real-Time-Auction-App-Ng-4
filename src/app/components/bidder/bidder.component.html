@@ -19,27 +19,22 @@
       <li><strong>Title:</strong>{{k.Title}}</li>
       <li><strong>Description:</strong>{{k.Description}}</li>
       <li><strong>Category:</strong>{{k.Category}}</li>
-      <li><strong>Minimum Amount:</strong>RS:{{k.MinimumBidAmount}}</li>
+      <li><strong>Minimum Amount:</strong>RS:{{k.BidStartingAmount}}</li>
       <li>
         <button md-button class="button" type="button" (click)="bid(i,k.Category)">View Details</button>
       </li>
     </md-card>
   </ul>
-
-
   <br>
-
   <ul *ngFor="let b of mybid;let n=index">
-
     <md-card>
-
       <p><strong>Details of Selected Item</strong></p>
       <li><strong>Title:</strong>{{b.Title}}</li>
       <li><strong>Description:</strong>{{b.Description}}</li>
       <li><strong>Category:</strong>{{b.Category}}</li>
       <li><strong>AuctionEndDate:</strong>{{b.AutionEndDate}}</li>
       <li><strong>AuctionEndTime:</strong>{{b.AutionEndTime}}</li>
-      <li><strong>MinimumBidAmount:</strong>{{b.MinimumBidAmount}}</li>
+      <li><strong>MinimumBidAmount:</strong>{{b.BidStartingAmount}}</li>
       <div *ngIf="True">
         <div class="ended">
           <li><strong>Item Awarded To :</strong>{{largestname}}</li>
@@ -67,9 +62,12 @@
                   <h4></h4>
                 </div>
                 <div>
-                  <p><strong>Bid Starting Amount:</strong>{{b.MinimumBidAmount}}</p>
+                  <p><strong>Bid Starting Amount:</strong>{{b.BidStartingAmount}}</p>
                   <p><strong>Highest Bid Uptill is : </strong>{{largest}}</p>
                   <p><strong>Highest Bidder Name : </strong>{{largestname}}</p>
+                  <p>
+                    <Strong>Item awarded To</Strong>{{awardedname}}</p>
+                  <!-- </md-card> -->
                   <md-input-container>
                     <input mdInput placeholder="Enter Amount in numbers" type="number" name="amount" [(ngModel)]="amount">
                   </md-input-container><br>
@@ -102,6 +100,7 @@
           <md-card-content>
             <Strong>Proposed Bid Amount:</Strong>{{bb.amount}}</md-card-content>
         </md-card>
+
       </ul>
     </md-card>
   </ul>

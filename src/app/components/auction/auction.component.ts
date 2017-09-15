@@ -3,8 +3,7 @@ import { Store } from '@ngrx/store';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DataService } from "../../services/data.service";
 import { ProductService } from "../../services/product.service";
-import UserModel from "../../reducer/action";
-import ProductModel, { Categories } from "../../reducer/product";
+import ProductModel, { Categories } from "../../models/product";
 import { Router } from "@angular/router";
 import { AngularFireDatabase } from "angularfire2/database";
 import { AngularFireAuth } from "angularfire2/auth";
@@ -20,7 +19,7 @@ export class AuctionComponent implements OnInit {
     private userService: DataService,
     private productsService: ProductService,
     private router: Router,
-    private store: Store<UserModel>,
+    private store: Store<ProductModel>,
     public db: AngularFireDatabase,
     public af: AngularFireAuth,
   ) { }
@@ -39,7 +38,6 @@ export class AuctionComponent implements OnInit {
   show = false;
   submitshow = false
   submit(value: ProductModel) {
-
     let startdate = new Date(value.AutionEndDate + " " + value.AutionEndTime);
     if (startdate.getTime() < new Date().getTime()) {
       this.show = true;
@@ -47,12 +45,7 @@ export class AuctionComponent implements OnInit {
     }
     else {
       value.uid = this.af.auth.currentUser.uid;
-      value.Title = value.Title;
-      value.Description = value.Description;
-      value.AutionEndDate = value.AutionEndDate;
       value.AutionEndTimeStamp = startdate.getTime();
-      value.MinimumBidAmount = value.BidStartingAmount;
-      value.Category = value.Category;
       console.log(value)
       this.db.list("auction/" + value.Category).push(value);
       this.submitshow = true;

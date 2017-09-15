@@ -6,11 +6,4 @@ export class ProductService {
 
   constructor(public db: AngularFireDatabase) { }
 
-
-
-  addProduct(value, uid) {
-    this.db.object("/product/" + uid).set(value)
-  }
-
-
 }

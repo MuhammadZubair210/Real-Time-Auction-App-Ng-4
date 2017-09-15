@@ -17,7 +17,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
-import { appReducer } from './reducer/store';
+import { Reducer } from './store';
 import { HomeComponent } from './home/home.component';
 import { AuctionComponent } from './components/auction/auction.component';
 import { BidderComponent } from './components/bidder/bidder.component';
@@ -63,9 +63,9 @@ const routes: Routes = [
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
-    StoreModule.provideStore({ appStore: appReducer })
+    StoreModule.provideStore({ appStore: Reducer })
   ],
-  providers: [DataService, FormBuilder,ProductService],
+  providers: [DataService, FormBuilder, ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

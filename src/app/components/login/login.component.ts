@@ -17,6 +17,4 @@ export class LoginComponent implements OnInit {
   login() {
     this._service.login(this.email, this.password)
   }
-
-
 }

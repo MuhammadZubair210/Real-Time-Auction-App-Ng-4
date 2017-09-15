@@ -5,8 +5,8 @@ import { Router, Route } from '@angular/router';
 import { Observable } from "rxjs/Observable";
 import * as firebase from 'firebase/app';
 import { Store } from '@ngrx/store';
-import { ActionType } from '../reducer/store'
-import UserModel from '../reducer/action'
+import { ActionType } from '../store'
+import UserModel from '../models/user'
 @Injectable()
 export class DataService {
   authstate;
@@ -62,17 +62,16 @@ export class DataService {
         });
       })
   }
-    
-  register(name: string, email: string, password: string, type: string) {
+
+  register(form) {
     console.log("successfull");
-    console.log(name, email, password, type);
-    this.af.auth.createUserWithEmailAndPassword(email, password)
+    console.log(form);
+    this.af.auth.createUserWithEmailAndPassword(form.email, form.password)
       .then(value => {
         console.log('Success!');
         this.uuid = this.af.auth.currentUser.uid;
-        let formdata = { name, email, password, type };
-        this.db.list("/users/" + this.uuid).push(formdata);
-        this.store.dispatch({ type: ActionType.User, payload: formdata });
+        this.db.list("/users/" + this.uuid).push(form);
+        this.store.dispatch({ type: ActionType.Register, payload: form });
         this.router.navigate(["/login"])
       })
       .catch(err => {
@@ -80,12 +79,17 @@ export class DataService {
 
       })
   }
-
+  public UserFirebaseObservable: FirebaseListObservable<UserModel[]>;
   login(email, password) {
     this.af.auth.signInWithEmailAndPassword(email, password)
       .then(value => {
         console.log("success");
         this.showuser();
+        this.uuid = this.af.auth.currentUser.uid;
+        this.UserFirebaseObservable = this.db.list('/users/' + this.uuid);
+        this.UserFirebaseObservable.subscribe((data) => {
+          return this.store.dispatch({ type: ActionType.User, payload: data });
+        })
       })
       .catch(err => {
         console.log("something wrong", err);
@@ -94,10 +98,10 @@ export class DataService {
   }
   logout() {
     this.af.auth.signOut();
-    this.store.dispatch({ type: ActionType.User, payload: null });
+    return this.store.dispatch({ type: ActionType.Nouser, payload: null });
   }
-  names;
-  name;
+  names: String;
+  name: String;
   fetchname(uid) {
     this.userprofile = this.db.list('/users/' + uid, { preserveSnapshot: true });
     this.userprofile
@@ -111,16 +115,4 @@ export class DataService {
       })
     this.names = this.name
   }
-
-  // applybids(uid) {
-  //   this.userprofile = this.db.list('/auction/' + uid, { preserveSnapshot: true });
-  //   this.userprofile
-  //     .subscribe(snapshots => {
-  //       this.name;
-  //       snapshots.forEach(snapshot => {
-  //         this.name = snapshot.val().name;
-  //         console.log(this.name)
-  //       })
-  //     })
-  // }
 }
